@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <nav class="menu">
+    <nav role = "navigation" aria-label="Personal Budget" class="menu">
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="./about.html">About</a></li>
@@ -18,13 +18,13 @@
         </ul>
     </nav>
 
-    <header class="hero">
+    <header id="header" aria-label="Header" class="hero">
         <h1>Personal Budget</h1>
         <h2>A personal-budget management app</h2>
     </header>
 
-    <main class="container center">
-
+    <main id="main" aria-label="Main" class="container center">
+        <!-- Added Microdata -->
         <section itemscope
          class="page-area">
 
@@ -96,7 +96,7 @@
 
     </main>
 
-    <footer class="bottom">
+    <footer id="footer-nav" aria-label="Footer" class="bottom">
         <div class="center">
             All rights reserved &copy; Fabio Nolasco
         </div>
