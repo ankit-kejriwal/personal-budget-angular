@@ -13,6 +13,9 @@ nav.menu {
     height: 44px;
     padding: 0 40px;
 }
+.hidden {
+    display: none;
+}
 
 nav.menu ul,
 nav.menu ul li {
