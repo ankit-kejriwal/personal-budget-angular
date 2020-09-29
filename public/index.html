@@ -108,9 +108,9 @@
             </article>
     
             <article itemprop="details" class="text-box">
-                <h2>Free</h2>
+                <h2>Chart</h2>
                 <p>
-                    This app is free!!! And you are the only one holding your data!
+                    <canvas id="myChart" width="400" height="400"></canvas>
                 </p>
             </article>
 
@@ -124,6 +124,45 @@
             All rights reserved &copy; Fabio Nolasco
         </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
+    <script>
+        var dataSource = {
+            datasets: [{
+                data: [],
+                backgroundColor: [
+                    'rgba(255, 99, 132)',
+                    'rgba(54, 162, 235)',
+                    'rgba(255, 206, 86)',
+                    'rgba(75, 192, 192)'
+                ],
+            }],
 
+            // These labels appear in the legend and in the tooltips when hovering different arcs
+            labels: []
+        };
+        function createChart(){
+            var ctx = document.getElementById("myChart").getContext("2d");
+            var myDoughnutChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: dataSource
+            });
+        }
+        function getBudget(){
+            axios.get('/budget')
+            .then(function (res){
+                console.log(res.data);
+                for(var i  = 0;i<res.data.myBudget.length;i++){
+                    dataSource.datasets[0].data[i] = res.data.myBudget[i].budget;
+                    dataSource.labels[i] = res.data.myBudget[i].title;
+                }
+                createChart();
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+        }
+        getBudget();
+    </script>
 </body>
 </html>
