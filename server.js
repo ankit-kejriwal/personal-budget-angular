@@ -1,8 +1,9 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port  =  3000;
 
-app.use('/',express.static('public'));
+app.use(cors());
 const fs = require('fs');
 var obj = '';
 fs.readFile('./budget.json', 'utf8', function (err, data) {
@@ -11,9 +12,7 @@ fs.readFile('./budget.json', 'utf8', function (err, data) {
 });
 
 // const budget;
-app.get('/hello',(req,res) => {
-    res.send('Hello World!');
-})
+
 
 app.get('/budget',(req,res) => {
     res.json(obj);
